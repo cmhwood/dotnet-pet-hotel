@@ -7,4 +7,10 @@ namespace pet_hotel.Models;
 public class PetOwner
 {
    // Fields go here
+//    {
+//   "id": 1,
+//   "email": "asdf@asdf.com",
+//   "name": "blaine",
+//   "petCount": 1
+// }
 }
