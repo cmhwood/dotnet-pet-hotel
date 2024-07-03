@@ -76,7 +76,7 @@ public class PetsController : ControllerBase
   public IActionResult CheckIn(int petId)
   {
     Pet pet = _context.Pets.SingleOrDefault(pet => pet.id == petId);
-    Console.WriteLine('pet',pet);
+    Console.WriteLine(pet);
    pet.CheckedInAtSet();
     _context.Pets.Update(pet);
     _context.SaveChanges();
