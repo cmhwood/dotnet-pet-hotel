@@ -48,14 +48,14 @@ public class Pet
 
   [Required]
   [JsonConverter(typeof(JsonStringEnumConverter))]
-  public Petcolor color { get; set; }
+  public Petcolor PetColor { get; set; }
 
    [Required]
   public DateTime? CheckedInAt { get; set; }
 
     [Required]
   [JsonConverter(typeof(JsonStringEnumConverter))]
-  public Petbreed breed { get; set; }
+  public Petbreed PetBreed { get; set; }
 
   public PetOwner PetOwner { get; set; }
 
