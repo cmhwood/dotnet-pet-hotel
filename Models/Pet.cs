@@ -71,7 +71,7 @@ public class Pet
 
    public void CheckedInAtSet()
   {
-    this.checkedInAt = DateTime.Now;
+    this.checkedInAt = DateTime.UtcNow;
   }
 
 

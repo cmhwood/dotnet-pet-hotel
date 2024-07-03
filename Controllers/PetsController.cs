@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using pet_hotel.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace pet_hotel.Controllers;
 
@@ -72,24 +75,35 @@ public class PetsController : ControllerBase
 
     return NoContent(); // 204 no content
   }
-      [HttpPut("{petId}/checkin")] // double check URL
-  public IActionResult CheckIn(int petId)
-  {
-    Pet pet = _context.Pets.SingleOrDefault(pet => pet.id == petId);
-    Console.WriteLine(pet);
-   pet.CheckedInAtSet();
-    _context.Pets.Update(pet);
-    _context.SaveChanges();
-    return Ok(pet);
-  }
-    [HttpPut("{petId}/checkout")] // double check URL
-  public IActionResult CheckOut(int petId)
-  {
-    Pet pet = _context.Pets.SingleOrDefault(pet => pet.id == petId);
-    pet.CheckedInAtReset();
-    _context.Pets.Update(pet);
-    _context.SaveChanges();
-    return Ok(pet);
-  }
+    [HttpPut("{petId}/checkin")]
+        public IActionResult CheckIn(int petId)
+        {
+            Pet pet = _context.Pets.SingleOrDefault(pet => pet.id == petId);
+            if (pet == null)
+            {
+                return NotFound();
+            }
+
+            pet.CheckedInAtSet(); // Set current time as checked-in time
+            _context.Pets.Update(pet);
+            _context.SaveChanges();
+
+            return Ok(pet);
+        }
+    [HttpPut("{petId}/checkout")]
+        public IActionResult CheckOut(int petId)
+        {
+            Pet pet = _context.Pets.SingleOrDefault(pet => pet.id == petId);
+            if (pet == null)
+            {
+                return NotFound();
+            }
+
+            pet.CheckedInAtReset(); // Reset checked-in time to null
+            _context.Pets.Update(pet);
+            _context.SaveChanges();
+
+            return Ok(pet);
+        }
    // routes go here
 }
