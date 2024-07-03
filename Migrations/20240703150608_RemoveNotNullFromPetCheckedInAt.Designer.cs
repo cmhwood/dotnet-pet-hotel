@@ -12,8 +12,8 @@ using pet_hotel.Models;
 namespace pet_hotel_7._0.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240702205436_CreatePetAndOwnersTable")]
-    partial class CreatePetAndOwnersTable
+    [Migration("20240703150608_RemoveNotNullFromPetCheckedInAt")]
+    partial class RemoveNotNullFromPetCheckedInAt
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,32 +27,31 @@ namespace pet_hotel_7._0.Migrations
 
             modelBuilder.Entity("pet_hotel.Models.Pet", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<DateTime?>("CheckedInAt")
-                        .IsRequired()
+                    b.Property<DateTime?>("checkedInAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("name")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("PetOwnerId")
+                    b.Property<int>("petBreed")
                         .HasColumnType("integer");
 
-                    b.Property<int>("breed")
+                    b.Property<int>("petColor")
                         .HasColumnType("integer");
 
-                    b.Property<int>("color")
+                    b.Property<int>("petOwnerId")
                         .HasColumnType("integer");
 
-                    b.HasKey("Id");
+                    b.HasKey("id");
 
-                    b.HasIndex("PetOwnerId");
+                    b.HasIndex("petOwnerId");
 
                     b.ToTable("Pets");
                 });
@@ -80,13 +79,13 @@ namespace pet_hotel_7._0.Migrations
 
             modelBuilder.Entity("pet_hotel.Models.Pet", b =>
                 {
-                    b.HasOne("pet_hotel.Models.PetOwner", "PetOwner")
+                    b.HasOne("pet_hotel.Models.PetOwner", "petOwner")
                         .WithMany("Pets")
-                        .HasForeignKey("PetOwnerId")
+                        .HasForeignKey("petOwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("PetOwner");
+                    b.Navigation("petOwner");
                 });
 
             modelBuilder.Entity("pet_hotel.Models.PetOwner", b =>
