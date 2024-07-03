@@ -51,7 +51,7 @@ public class Pet
   public Petcolor color { get; set; }
 
    [Required]
-  public Nullable <DateTime> CheckedInAt { get; set; }
+  public DateTime? CheckedInAt { get; set; }
 
     [Required]
   [JsonConverter(typeof(JsonStringEnumConverter))]
