@@ -17,7 +17,7 @@ public class PetsController : ControllerBase
    [HttpGet]
   public IEnumerable<Pet> GetPets()
   {
-    return _context.Pets.Include(PetOwner => PetOwner.PetOwnerId).ToList();
+    return _context.Pets.Include(pet => pet.PetOwner).OrderBy(pet => pet.Name).ToList();
   }
 
   
