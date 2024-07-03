@@ -62,6 +62,11 @@ public class Pet
   [Required]
   public int PetOwnerId { get; set; }
 
+  public void CheckedInAtReset()
+  {
+    this.CheckedInAt = null;
+  }
+
  
 
   
