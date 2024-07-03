@@ -42,19 +42,19 @@ public class PetsController : ControllerBase
   {
     _context.Pets.Add(newPet);
     _context.SaveChanges();
-    return Created($"/api/pets/{newPet.id}", null); 
+    return Created($"/api/pets/{newPet.id}", newPet); 
   }
    // PUT /{id}
   [HttpPut("{petId}")]
-  public IActionResult UpdatePetsById(int petId, [FromBody] Pet updatedPet)
+  public IActionResult UpdatePetsById(int petId, [FromBody] Pet newPet)
   {
     Pet pet = _context.Pets.SingleOrDefault(pet => pet.id == petId);
     if (pet == null) return NotFound();
 
-    pet.name = updatedPet.name;
-    pet.petBreed = updatedPet.petBreed;
-    pet.petColor = updatedPet.petColor;
-    pet.checkedInAt = updatedPet.checkedInAt;
+    pet.name = newPet.name;
+    pet.petBreed = newPet.petBreed;
+    pet.petColor = newPet.petColor;
+    pet.checkedInAt = newPet.checkedInAt;
 
 
     _context.Pets.Update(pet);
