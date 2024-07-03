@@ -65,7 +65,7 @@ public class PetsController : ControllerBase
 
     // DELETE /{id}
   [HttpDelete("{petId}")]
-  public IActionResult DeleteBreadById(int petId)
+  public IActionResult DeletePetById(int petId)
   {
     Pet pet = _context.Pets.SingleOrDefault(pet => pet.id == petId);
     if (pet == null) return NotFound(); // 404 response
