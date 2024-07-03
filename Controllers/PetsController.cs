@@ -49,8 +49,8 @@ public class PetsController : ControllerBase
     if (pet == null) return NotFound();
 
     pet.Name = updatedPet.Name;
-    pet.breed = updatedPet.breed;
-    pet.color = updatedPet.color;
+    pet.PetBreed = updatedPet.PetBreed;
+    pet.PetColor = updatedPet.PetColor;
     pet.CheckedInAt = updatedPet.CheckedInAt;
 
 
