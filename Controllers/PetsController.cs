@@ -37,12 +37,21 @@ public class PetsController : ControllerBase
   }
 
   // POST /
+  // [HttpPost]
+  // public IActionResult CreatePet([FromBody] Pet newPet)
+  // {
+  //   _context.Pets.Add(newPet);
+  //   _context.SaveChanges();
+  //   return Created($"/api/pets/{newPet.id}", newPet); 
+  // }
+
   [HttpPost]
-  public IActionResult CreatePet([FromBody] Pet newPet)
+  public ActionResult AddPet(Pet pet)
   {
-    _context.Pets.Add(newPet);
+    _context.Pets.Add(pet);
     _context.SaveChanges();
-    return Created($"/api/pets/{newPet.id}", newPet); 
+    Pet CreatedPet = _context.Pets.OrderByDescending(p => p.id).Include(p => p.petOwner).FirstOrDefault();
+    return CreatedAtAction(nameof(GetPetById), new { Id = pet.id }, CreatedPet);
   }
    // PUT /{id}
   [HttpPut("{petId}")]
