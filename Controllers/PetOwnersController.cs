@@ -17,13 +17,13 @@ public class PetOwnersController : ControllerBase
 [HttpGet]
 public IEnumerable<PetOwner> GetPetOwners()
 {
-   return _context.PetOwners.Include(PetOwner => PetOwner.Pets).ToList();
+   return _context.PetOwners.Include(PetOwner => PetOwner.pets).ToList();
 }
 
 [HttpGet("{PetOwnerId}")]
 public IActionResult GetOwnerById(int PetOwnerId)
 {
-   PetOwner petOwner = _context.PetOwners.Include(p => p.Pets).SingleOrDefault(petOwner => petOwner.Id == PetOwnerId);
+   PetOwner petOwner = _context.PetOwners.Include(p => p.pets).SingleOrDefault(petOwner => petOwner.id == PetOwnerId);
    if (petOwner == null)
    {
       return NotFound();
@@ -35,13 +35,13 @@ public IActionResult GetOwnerById(int PetOwnerId)
 public IActionResult CreatePetOwner([FromBody] PetOwner newPetOwner) {
    _context.PetOwners.Add(newPetOwner);
    _context.SaveChanges();
-   return CreatedAtAction("/", new { Id = newPetOwner.Id }, newPetOwner);
+   return CreatedAtAction("/", new { Id = newPetOwner.id }, newPetOwner);
 }
 
 [HttpDelete("{PetOwnerId}")]
 public IActionResult DeletePetOwnerById(int PetOwnerId)
 {
-   PetOwner petOwner = _context.PetOwners.SingleOrDefault(petOwner => petOwner.Id == PetOwnerId);
+   PetOwner petOwner = _context.PetOwners.SingleOrDefault(petOwner => petOwner.id == PetOwnerId);
    if (petOwner == null) return NotFound();
 
    _context.PetOwners.Remove(petOwner);
@@ -53,10 +53,10 @@ public IActionResult DeletePetOwnerById(int PetOwnerId)
 [HttpPut("{petOwnerId}")]
 public IActionResult UpdatePetOwnerById(int petOwnerId, [FromBody] PetOwner updatedPetOwner)
 {
-   PetOwner petOwner = _context.PetOwners.SingleOrDefault(petOwner => petOwner.Id == petOwnerId);
+   PetOwner petOwner = _context.PetOwners.SingleOrDefault(petOwner => petOwner.id == petOwnerId);
    if (petOwner ==null) return NotFound();
 
-   petOwner.Name = updatedPetOwner.Name;
+   petOwner.name = updatedPetOwner.name;
 
    _context.PetOwners.Update(petOwner);
    _context.SaveChanges();

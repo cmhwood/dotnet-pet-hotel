@@ -7,24 +7,24 @@ namespace pet_hotel.Models;
 
 public class PetOwner
 {
-   public int Id { get; set; }
+   public int id { get; set; }
 
    [Required]
-   public string Name { get; set; }
+   public string name { get; set; }
 
    [Required]
-   public string Email { get; set; }
+   public string email { get; set; }
 
    [JsonIgnore]
-   public ICollection<Pet> Pets { get; set; }
-   
+   public ICollection<Pet> pets { get; set; }
+
 
    [NotMapped]
-   public int PetCount
+   public int petCount
    {
       get
       {
-         return (Pets != null) ? Pets.Count : 0;
+         return (pets != null) ? pets.Count : 0;
       }
    }
 }
